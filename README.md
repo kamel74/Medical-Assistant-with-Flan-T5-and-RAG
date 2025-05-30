@@ -13,5 +13,5 @@ This project is a Streamlit-based web application that implements a medical ques
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/medical-assistant-flan-t5-rag.git
+   git clone https://github.com/kamel74/medical-assistant-flan-t5-rag.git
    cd medical-assistant-flan-t5-rag
