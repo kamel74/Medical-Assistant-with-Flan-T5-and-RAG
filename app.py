@@ -8,7 +8,6 @@ import pandas as pd
 
 from transformers import pipeline
 
-# إنشاء نموذج Flan-T5 (text2text-generation)
 generator = pipeline('text2text-generation', model='google/flan-t5-base')
 
 def create_sample_medical_data(file_path="medical_data.txt"):
@@ -36,13 +35,11 @@ def create_vector_store(chunks):
     vector_store = DocArrayInMemorySearch.from_texts(texts=chunks, embedding=embedding_model)
     return vector_store
 
-# توليد إجابة baseline باستخدام Flan-T5
 def generate_baseline_answer(question):
     prompt = f"Answer the question concisely: {question}"
     response = generator(prompt, max_length=100, num_return_sequences=1)
     return response[0]['generated_text'].strip()
 
-# توليد إجابة RAG باستخدام Flan-T5 مع سياق مسترجع من vector store
 def rag_answer(vector_store, question, k=3):
     docs = vector_store.as_retriever(search_kwargs={"k": k}).get_relevant_documents(question)
     context = "\n\n".join([doc.page_content for doc in docs])
